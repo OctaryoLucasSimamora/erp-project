@@ -48,5 +48,30 @@
         </div>
     </li>
     
-    <!-- Optional: Tambahkan menu lain jika perlu -->
+   <!-- Tambahkan setelah menu Manufacturing -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee"
+        aria-expanded="true" aria-controls="collapseEmployee">
+        <i class="fas fa-users"></i>
+        <span>Employee</span>
+    </a>
+    <div id="collapseEmployee" class="collapse" aria-labelledby="headingEmployee"
+        data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">EMPLOYEE MENU:</h6>
+            
+            <a class="collapse-item" href="{{ route('employee.department.index') }}">
+                <i class="fas fa-building"></i> Department
+            </a>
+            
+            <a class="collapse-item" href="{{ route('employee.job_position.index') }}">
+                <i class="fas fa-briefcase"></i> Job Position
+            </a>
+            
+            <a class="collapse-item" href="{{ route('employee.employee.index') }}">
+                <i class="fas fa-user-tie"></i> Employee
+            </a>
+        </div>
+    </div>
+</li>
 </ul>
