@@ -12,6 +12,8 @@
     </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">Modules</div>
+    
+    <!-- MANUFACTURING MODULE -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManufacturing"
             aria-expanded="true" aria-controls="collapseManufacturing">
@@ -24,6 +26,11 @@
             <div class="bg-white py-2 collapse-inner rounded">
 
                 <h6 class="collapse-header">Manufacturing Menu:</h6>
+
+                <!-- TAMBAHKAN MENU MANUFACTURING ORDER -->
+                <a class="collapse-item" href="{{ route('manufacturing.index') }}">
+                    <i class="fas fa-clipboard-list"></i> Manufacturing Order
+                </a>
 
                 <a class="collapse-item" href="{{ route('products.index') }}">
                     <i class="fas fa-box"></i> Produk
@@ -40,4 +47,6 @@
             </div>
         </div>
     </li>
+    
+    <!-- Optional: Tambahkan menu lain jika perlu -->
 </ul>

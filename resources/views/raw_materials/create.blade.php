@@ -36,6 +36,13 @@
                 <input type="number" name="price" class="form-control" required>
             </div>
 
+            <!-- TAMBAHKAN FIELD STOK -->
+            <div class="form-group mb-3">
+                <label>Stok Awal</label>
+                <input type="number" name="stock" class="form-control" value="0" step="0.01" min="0" required>
+                <small class="text-muted">Masukkan jumlah stok awal bahan baku</small>
+            </div>
+
             <div class="form-group mb-3">
                 <label>Deskripsi</label>
                 <textarea name="description" class="form-control"></textarea>

@@ -10,7 +10,14 @@ class BoM extends Model
 
     protected $fillable = [
         'product_id',
-        'quantity'
+        'quantity',
+        'total_cost'  // PENTING: Tambahkan ini
+    ];
+
+    // Cast ke float agar konsisten
+    protected $casts = [
+        'quantity' => 'float',
+        'total_cost' => 'float',
     ];
 
     public function product()

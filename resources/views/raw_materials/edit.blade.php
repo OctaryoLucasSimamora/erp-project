@@ -46,6 +46,13 @@
                 <input type="number" name="price" class="form-control" value="{{ $material->price }}" required>
             </div>
 
+            <!-- TAMBAHKAN FIELD STOK -->
+            <div class="form-group mb-3">
+                <label>Stok Tersedia</label>
+                <input type="number" name="stock" class="form-control" value="{{ $material->stock ?? 0 }}" step="0.01" min="0" required>
+                <small class="text-muted">Jumlah stok saat ini</small>
+            </div>
+
             <div class="form-group mb-3">
                 <label>Deskripsi</label>
                 <textarea name="description" class="form-control">{{ $material->description }}</textarea>
@@ -57,4 +64,3 @@
     </div>
 </div>
 @endsection
-

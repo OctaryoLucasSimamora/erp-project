@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class RawMaterial extends Model
 {
+    use HasFactory;
+    
     protected $fillable = [
         'material_code',
         'name',
         'category',
         'unit',
         'price',
+        'stock', // Tambahkan ini
         'description',
     ];
 }
-

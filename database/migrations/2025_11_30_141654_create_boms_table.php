@@ -10,18 +10,17 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    Schema::create('boms', function (Blueprint $table) {
-        $table->id();
-        $table->unsignedBigInteger('product_id'); // product jadi
-        $table->float('quantity')->default(1);    // jumlah hasil produksi
-        $table->float('total_cost')->default(0);  // otomatis
-        $table->timestamps();
+    {
+        Schema::create('boms', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('product_id');
+            $table->decimal('quantity', 10, 2)->default(1);  // UBAH dari float
+            $table->decimal('total_cost', 15, 2)->default(0); // UBAH dari float
+            $table->timestamps();
 
-        $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-    });
-}
-
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+        });
+    }
 
     /**
      * Reverse the migrations.

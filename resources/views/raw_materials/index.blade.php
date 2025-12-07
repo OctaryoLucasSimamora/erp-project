@@ -22,6 +22,7 @@
                     <th>Kategori</th>
                     <th>Satuan</th>
                     <th>Harga</th>
+                    <th>Stok</th> <!-- TAMBAHKAN KOLOM STOK -->
                     <th width="150">Aksi</th>
                 </tr>
             </thead>
@@ -33,6 +34,15 @@
                     <td>{{ $m->category }}</td>
                     <td>{{ $m->unit }}</td>
                     <td>{{ number_format($m->price) }}</td>
+                    <td>
+                        <!-- TAMPILKAN STOK DENGAN WARNA BERDASARKAN KETERSEDIAAN -->
+                        @php
+                            $stockClass = $m->stock > 0 ? 'text-success' : 'text-danger';
+                        @endphp
+                        <span class="{{ $stockClass }}">
+                            {{ number_format($m->stock, 2) }}
+                        </span>
+                    </td>
                     <td>
                         <a href="{{ route('raw-materials.edit',$m->id) }}" class="btn btn-sm btn-warning">Edit</a>
                         <form action="{{ route('raw-materials.destroy',$m->id) }}" method="POST" class="d-inline">

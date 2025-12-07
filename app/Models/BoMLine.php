@@ -11,9 +11,16 @@ class BoMLine extends Model
     protected $fillable = [
         'bom_id',
         'raw_material_id',
-        'quantity',   // gunakan nama ini (bukan qty)
-        'cost',       // harga per unit bahan
-        'subtotal'    // quantity * cost
+        'quantity',
+        'cost',
+        'subtotal'
+    ];
+
+    // Cast untuk konsistensi tipe data
+    protected $casts = [
+        'quantity' => 'float',
+        'cost' => 'decimal:2',
+        'subtotal' => 'decimal:2',
     ];
 
     public function bom()

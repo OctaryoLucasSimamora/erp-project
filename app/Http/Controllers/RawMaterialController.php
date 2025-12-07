@@ -35,6 +35,7 @@ class RawMaterialController extends Controller
             'category' => 'required',
             'unit' => 'required',
             'price' => 'required|numeric',
+            'stock' => 'required|numeric|min:0', // VALIDASI STOK
         ]);
 
         RawMaterial::create([
@@ -43,6 +44,7 @@ class RawMaterialController extends Controller
             'category' => $request->category,
             'unit' => $request->unit,
             'price' => $request->price,
+            'stock' => $request->stock, // SIMPAN STOK
             'description' => $request->description,
         ]);
 
@@ -69,9 +71,17 @@ class RawMaterialController extends Controller
             'category' => 'required',
             'unit' => 'required',
             'price' => 'required|numeric',
+            'stock' => 'required|numeric|min:0', // VALIDASI STOK
         ]);
 
-        $raw_material->update($request->all());
+        $raw_material->update([
+            'name' => $request->name,
+            'category' => $request->category,
+            'unit' => $request->unit,
+            'price' => $request->price,
+            'stock' => $request->stock, // UPDATE STOK
+            'description' => $request->description,
+        ]);
 
         return redirect()->route('raw-materials.index')
             ->with('success','Bahan baku berhasil diperbarui');
@@ -84,4 +94,3 @@ class RawMaterialController extends Controller
             ->with('success','Bahan baku berhasil dihapus');
     }
 }
-
