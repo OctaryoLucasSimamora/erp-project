@@ -72,10 +72,10 @@
                             </td>
                             <td class="text-center">
                                 @if ($bill->status == 'draft' || $bill->status == 'posted')
-                                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#paymentModal{{ $bill->id }}">
+                                    <a href="{{ route('purchase.vendor-bill.payment.create', $bill->id) }}"
+                                        class="btn btn-sm btn-success">
                                         <i class="fas fa-money-bill-wave"></i> Pay
-                                    </button>
+                                    </a>
                                 @endif
 
                                 <a href="{{ route('purchase.vendor-bill.edit', $bill->id) }}"

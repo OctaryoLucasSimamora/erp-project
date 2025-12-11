@@ -201,13 +201,15 @@ class VendorBillController extends Controller
         return redirect()->back()->with('success', 'Status Vendor Bill berhasil diubah!');
     }
 
-    // Method untuk membuat payment
+    // Method untuk menampilkan halaman payment
     public function createPayment($id)
     {
-        $vendorBill = VendorBill::findOrFail($id);
+        $vendorBill = VendorBill::with(['vendor', 'purchaseOrder', 'payments'])->findOrFail($id);
+        
         return view('purchase.vendor_bill.payment', compact('vendorBill'));
     }
 
+    // Method untuk memproses payment
     public function processPayment(Request $request, $id)
     {
         $request->validate([
@@ -215,6 +217,7 @@ class VendorBillController extends Controller
             'amount' => 'required|numeric|min:0.01',
             'payment_date' => 'required|date',
             'memo' => 'nullable|string',
+            'reference' => 'nullable|string|max:100',
         ]);
 
         DB::beginTransaction();
@@ -222,7 +225,21 @@ class VendorBillController extends Controller
         try {
             $vendorBill = VendorBill::findOrFail($id);
             
-            // Create payment
+            // Validasi status bill
+            if ($vendorBill->status == 'paid') {
+                return redirect()->back()->with('error', 'Bill sudah dibayar lunas.');
+            }
+            
+            if ($vendorBill->status == 'cancelled') {
+                return redirect()->back()->with('error', 'Tidak bisa memproses payment untuk bill yang dibatalkan.');
+            }
+            
+            // Validasi amount tidak melebihi balance
+            if ($request->amount > $vendorBill->balance) {
+                return redirect()->back()->with('error', 'Jumlah pembayaran melebihi sisa tagihan.');
+            }
+            
+            // Create payment record
             $payment = Payment::create([
                 'vendor_bill_id' => $vendorBill->id,
                 'payment_method' => $request->payment_method,
@@ -231,27 +248,35 @@ class VendorBillController extends Controller
                 'memo' => $request->memo,
                 'reference' => $request->reference,
             ]);
-
+            
             // Update vendor bill
             $newPaidAmount = $vendorBill->paid_amount + $request->amount;
             $newBalance = $vendorBill->total_amount - $newPaidAmount;
             
-            $status = 'posted';
+            // Tentukan status baru
+            $newStatus = $vendorBill->status;
             if ($newBalance <= 0) {
-                $status = 'paid';
+                $newStatus = 'paid';
+            } elseif ($vendorBill->status == 'draft') {
+                $newStatus = 'posted';
             }
-
+            
             $vendorBill->update([
                 'paid_amount' => $newPaidAmount,
                 'balance' => $newBalance,
-                'status' => $status,
+                'status' => $newStatus,
             ]);
-
+            
             DB::commit();
-
-            return redirect()->route('purchase.vendor_bill.index')
-                ->with('success', 'Pembayaran berhasil diproses!');
-
+            
+            $message = 'Pembayaran berhasil diproses.';
+            if ($newStatus == 'paid') {
+                $message .= ' Bill telah LUNAS.';
+            }
+            
+            return redirect()->route('purchase.vendor-bill.index')
+                ->with('success', $message);
+                
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()
