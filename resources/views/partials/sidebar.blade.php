@@ -12,7 +12,7 @@
     </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">Modules</div>
-    
+
     <!-- MANUFACTURING MODULE -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManufacturing"
@@ -47,31 +47,62 @@
             </div>
         </div>
     </li>
-    
-   <!-- Tambahkan setelah menu Manufacturing -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee"
-        aria-expanded="true" aria-controls="collapseEmployee">
-        <i class="fas fa-users"></i>
-        <span>Employee</span>
-    </a>
-    <div id="collapseEmployee" class="collapse" aria-labelledby="headingEmployee"
-        data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">EMPLOYEE MENU:</h6>
-            
-            <a class="collapse-item" href="{{ route('employee.department.index') }}">
-                <i class="fas fa-building"></i> Department
-            </a>
-            
-            <a class="collapse-item" href="{{ route('employee.job_position.index') }}">
-                <i class="fas fa-briefcase"></i> Job Position
-            </a>
-            
-            <a class="collapse-item" href="{{ route('employee.employee.index') }}">
-                <i class="fas fa-user-tie"></i> Employee
-            </a>
+
+    <!-- Tambahkan setelah menu Manufacturing -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee"
+            aria-expanded="true" aria-controls="collapseEmployee">
+            <i class="fas fa-users"></i>
+            <span>Employee</span>
+        </a>
+        <div id="collapseEmployee" class="collapse" aria-labelledby="headingEmployee" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">EMPLOYEE MENU:</h6>
+
+                <a class="collapse-item" href="{{ route('employee.department.index') }}">
+                    <i class="fas fa-building"></i> Department
+                </a>
+
+                <a class="collapse-item" href="{{ route('employee.job_position.index') }}">
+                    <i class="fas fa-briefcase"></i> Job Position
+                </a>
+
+                <a class="collapse-item" href="{{ route('employee.employee.index') }}">
+                    <i class="fas fa-user-tie"></i> Employee
+                </a>
+            </div>
         </div>
-    </div>
-</li>
+    </li>
+    <!-- PURCHASE MODULE -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePurchase"
+            aria-expanded="true" aria-controls="collapsePurchase">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Purchase</span>
+        </a>
+
+        <div id="collapsePurchase" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+                <h6 class="collapse-header">Purchase Menu:</h6>
+
+                <a class="collapse-item" href="{{ route('purchase.vendor.index') }}">
+                    <i class="fas fa-truck"></i> Vendor
+                </a>
+
+                <a class="collapse-item" href="{{ route('purchase.rfq.index') }}">
+                    <i class="fas fa-file-alt"></i> RFQ (Request for Quotation)
+                </a>
+
+                <a class="collapse-item" href="{{ route('purchase.po.index') }}">
+                    <i class="fas fa-file-invoice-dollar"></i> Purchase Order
+                </a>
+
+                <a class="collapse-item" href="{{ route('purchase.vendor-bill.index') }}">
+                    <i class="fas fa-receipt"></i> Vendor Bill
+                </a>
+
+            </div>
+        </div>
+    </li>
 </ul>
