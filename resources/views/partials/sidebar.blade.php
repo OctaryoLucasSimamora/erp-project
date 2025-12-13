@@ -81,6 +81,53 @@
         </div>
     </li>
 
+    <!--  SALES MODULE   -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
+            aria-expanded="true" aria-controls="collapseSales">
+            <i class="fas fa-chart-line"></i>
+            <span>Sales</span>
+        </a>
+
+        <div id="collapseSales" class="collapse" aria-labelledby="headingSales" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+                <h6 class="collapse-header">SALES MENU:</h6>
+
+                <!-- Quotation -->
+                <a class="collapse-item" href="{{ route('sales.quotation.index') }}">
+                    <i class="fas fa-file-invoice mr-2"></i> Quotation
+                </a>
+
+                <!-- Customer -->
+                <a class="collapse-item" href="">
+                    <i class="fas fa-user-friends mr-2"></i> Customer
+                </a>
+
+                <!-- Penjualan -->
+                <a class="collapse-item" href="">
+                    <i class="fas fa-shopping-cart mr-2"></i> Penjualan
+                </a>
+
+                <!-- Invoice -->
+                <a class="collapse-item" href="">
+                    <i class="fas fa-file-invoice-dollar mr-2"></i> Invoice
+                </a>
+
+                <!-- Laporan -->
+                <a class="collapse-item" href="">
+                    <i class="fas fa-chart-bar mr-2"></i> Laporan Penjualan
+                </a>
+
+                <!-- Retur (Opsional) -->
+                <a class="collapse-item" href="">
+                    <i class="fas fa-undo-alt mr-2"></i> Retur Penjualan
+                </a>
+
+            </div>
+        </div>
+    </li>
+
     <!-- PURCHASE Employee -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee"
@@ -88,7 +135,8 @@
             <i class="fas fa-users"></i>
             <span>Employee</span>
         </a>
-        <div id="collapseEmployee" class="collapse" aria-labelledby="headingEmployee" data-parent="#accordionSidebar">
+        <div id="collapseEmployee" class="collapse" aria-labelledby="headingEmployee"
+            data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">EMPLOYEE MENU:</h6>
 

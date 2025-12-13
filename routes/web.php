@@ -12,6 +12,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\RFQController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\VendorBillController;
+use App\Http\Controllers\QuotationController;
 
 
 /*
@@ -44,7 +45,7 @@ Route::prefix('employee')->group(function () {
     Route::get('/department/{id}/edit', [EmployeeController::class, 'departmentEdit'])->name('employee.department.edit');
     Route::put('/department/{id}', [EmployeeController::class, 'departmentUpdate'])->name('employee.department.update');
     Route::delete('/department/{id}', [EmployeeController::class, 'departmentDestroy'])->name('employee.department.destroy');
-    
+
     // Job Position routes
     Route::get('/job-position', [EmployeeController::class, 'jobPositionIndex'])->name('employee.job_position.index');
     Route::get('/job-position/create', [EmployeeController::class, 'jobPositionCreate'])->name('employee.job_position.create');
@@ -52,7 +53,7 @@ Route::prefix('employee')->group(function () {
     Route::get('/job-position/{id}/edit', [EmployeeController::class, 'jobPositionEdit'])->name('employee.job_position.edit');
     Route::put('/job-position/{id}', [EmployeeController::class, 'jobPositionUpdate'])->name('employee.job_position.update');
     Route::delete('/job-position/{id}', [EmployeeController::class, 'jobPositionDestroy'])->name('employee.job_position.destroy');
-    
+
     // Employee routes
     Route::get('/employee', [EmployeeController::class, 'employeeIndex'])->name('employee.employee.index');
     Route::get('/employee/create', [EmployeeController::class, 'employeeCreate'])->name('employee.employee.create');
@@ -63,7 +64,7 @@ Route::prefix('employee')->group(function () {
 });
 // Purchase Module Routes
 Route::prefix('purchase')->group(function () {
-    
+
     // ========== VENDOR ROUTES ==========
     Route::get('/vendor', [VendorController::class, 'index'])->name('purchase.vendor.index');
     Route::get('/vendor/create', [VendorController::class, 'create'])->name('purchase.vendor.create');
@@ -71,7 +72,7 @@ Route::prefix('purchase')->group(function () {
     Route::get('/vendor/{id}/edit', [VendorController::class, 'edit'])->name('purchase.vendor.edit');
     Route::put('/vendor/{id}', [VendorController::class, 'update'])->name('purchase.vendor.update');
     Route::delete('/vendor/{id}', [VendorController::class, 'destroy'])->name('purchase.vendor.destroy');
-    
+
     // ========== RFQ ROUTES ==========
     Route::get('/rfq', [RFQController::class, 'index'])->name('purchase.rfq.index');
     Route::get('/rfq/create', [RFQController::class, 'create'])->name('purchase.rfq.create');
@@ -81,7 +82,7 @@ Route::prefix('purchase')->group(function () {
     Route::delete('/rfq/{id}', [RFQController::class, 'destroy'])->name('purchase.rfq.destroy');
     Route::post('/rfq/{id}/status', [RFQController::class, 'updateStatus'])->name('purchase.rfq.status');
     Route::get('/rfq/{id}/convert', [RFQController::class, 'convertToPO'])->name('purchase.rfq.convert');
-    
+
     // ========== PURCHASE ORDER ROUTES ==========
     Route::get('/po', [PurchaseOrderController::class, 'index'])->name('purchase.po.index');
     Route::get('/po/create', [PurchaseOrderController::class, 'create'])->name('purchase.po.create');
@@ -91,7 +92,7 @@ Route::prefix('purchase')->group(function () {
     Route::delete('/po/{id}', [PurchaseOrderController::class, 'destroy'])->name('purchase.po.destroy');
     Route::post('/po/{id}/status', [PurchaseOrderController::class, 'updateStatus'])->name('purchase.po.status');
     Route::get('/po/{id}/convert', [PurchaseOrderController::class, 'convertToVendorBill'])->name('purchase.po.convert');
-    
+
     // ========== VENDOR BILL ROUTES ==========
     Route::get('/vendor-bill', [VendorBillController::class, 'index'])->name('purchase.vendor-bill.index');
     Route::get('/vendor-bill/create', [VendorBillController::class, 'create'])->name('purchase.vendor-bill.create');
@@ -103,4 +104,16 @@ Route::prefix('purchase')->group(function () {
     Route::get('/vendor-bill/{id}/payment', [VendorBillController::class, 'createPayment'])->name('purchase.vendor-bill.payment.create');
     Route::post('/vendor-bill/{id}/payment', [VendorBillController::class, 'processPayment'])->name('purchase.vendor-bill.payment.process');
     Route::get('/vendor-bill/convert/{poId}', [VendorBillController::class, 'convertFromPO'])->name('purchase.vendor-bill.convert');
+
+});
+// Sales - Quotation Routes
+Route::prefix('sales')->name('sales.')->group(function () {
+    Route::get('/quotation', [QuotationController::class, 'index'])->name('quotation.index');
+    Route::get('/quotation/create', [QuotationController::class, 'create'])->name('quotation.create');
+    Route::post('/quotation', [QuotationController::class, 'store'])->name('quotation.store');
+    Route::get('/quotation/{id}/edit', [QuotationController::class, 'edit'])->name ('quotation.edit');
+    Route::put('/quotation/{id}', [QuotationController::class, 'update'])->name('quotation.update');
+    Route::delete('/quotation/{id}', [QuotationController::class, 'destroy'])->name('quotation.destroy');
+    Route::post('/quotation/{id}/status', [QuotationController::class, 'updateStatus'])->name('quotation.status');
+    Route::get('/quotation/{id}/convert', [QuotationController::class, 'convertToSalesOrder'])->name('quotation.convert');
 });
