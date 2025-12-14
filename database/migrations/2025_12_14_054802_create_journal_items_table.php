@@ -10,7 +10,8 @@ return new class extends Migration
     {
         Schema::create('journal_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_invoice_id');
+            $table->unsignedBigInteger('reference_id');
+            $table->string('reference_type')->default('customer_invoice');
             $table->string('account_code', 10);
             $table->string('account_name');
             $table->decimal('debit', 15, 2)->default(0);
@@ -18,8 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
 
-            // Foreign key
-            $table->foreign('customer_invoice_id')->references('id')->on('customer_invoices')->onDelete('cascade');
+            // Index untuk performa query polymorphic
+            $table->index(['reference_id', 'reference_type']);
         });
     }
 

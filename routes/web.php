@@ -16,6 +16,7 @@ use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\SalesOrderController;
 use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\CustomerInvoiceController;
+use App\Http\Controllers\CustomerPaymentController;
 
 
 /*
@@ -158,7 +159,23 @@ Route::prefix('sales/invoice')->name('sales.invoice.')->group(function () {
     Route::delete('/{id}', [CustomerInvoiceController::class, 'destroy'])->name('destroy');
     Route::post('/{id}/post', [CustomerInvoiceController::class, 'markAsPosted'])->name('post');
     Route::post('/{id}/pay', [CustomerInvoiceController::class, 'markAsPaid'])->name('pay');
-    
+
     // TAMBAHKAN INI ↓
     Route::get('/source/items', [CustomerInvoiceController::class, 'getSourceItems'])->name('source.items');
+});
+
+// Customer Payment Routes
+Route::prefix('sales/payment')->name('sales.payment.')->group(function () {
+    Route::get('/', [CustomerPaymentController::class, 'index'])->name('index');
+    Route::get('/create', [CustomerPaymentController::class, 'create'])->name('create');
+    Route::post('/', [CustomerPaymentController::class, 'store'])->name('store');
+    Route::get('/{id}', [CustomerPaymentController::class, 'show'])->name('show');
+    Route::get('/{id}/edit', [CustomerPaymentController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [CustomerPaymentController::class, 'update'])->name('update');
+    Route::delete('/{id}', [CustomerPaymentController::class, 'destroy'])->name('destroy');
+    Route::post('/{id}/post', [CustomerPaymentController::class, 'markAsPosted'])->name('post');
+    Route::post('/{id}/reconcile', [CustomerPaymentController::class, 'markAsReconciled'])->name('reconcile');
+    Route::get('/{id}/allocate', [CustomerPaymentController::class, 'allocateInvoices'])->name('allocate');
+    Route::post('/{id}/allocate', [CustomerPaymentController::class, 'storeAllocation'])->name('allocate.store');
+    Route::get('/customer/{customerId}/invoices', [CustomerPaymentController::class, 'getCustomerInvoices'])->name('customer.invoices');
 });

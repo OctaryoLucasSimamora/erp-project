@@ -114,9 +114,9 @@
                 </a>
 
 
-                <!-- Retur (Opsional) -->
-                <a class="collapse-item" href="">
-                    <i class="fas fa-undo-alt mr-2"></i> Retur Penjualan
+                <!-- Customer Payment -->
+                <a class="collapse-item" href="{{ route('sales.payment.index') }}">
+                    <i class="fas fa-money-bill-wave mr-2"></i> Customer Payment
                 </a>
 
             </div>
