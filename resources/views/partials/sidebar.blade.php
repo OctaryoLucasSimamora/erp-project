@@ -94,6 +94,11 @@
 
                 <h6 class="collapse-header">SALES MENU:</h6>
 
+                <!-- Customer  -->
+                <a class="collapse-item" href="{{ route('sales.customer.index') }}">
+                    <i class="fas fa-user-friends mr-2"></i> Customer 
+                </a>
+
                 <!-- Quotation -->
                 <a class="collapse-item" href="{{ route('sales.quotation.index') }}">
                     <i class="fas fa-file-invoice mr-2"></i> Quotation

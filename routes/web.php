@@ -17,6 +17,7 @@ use App\Http\Controllers\SalesOrderController;
 use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\CustomerInvoiceController;
 use App\Http\Controllers\CustomerPaymentController;
+use App\Http\Controllers\CustomerController;
 
 
 /*
@@ -178,4 +179,15 @@ Route::prefix('sales/payment')->name('sales.payment.')->group(function () {
     Route::get('/{id}/allocate', [CustomerPaymentController::class, 'allocateInvoices'])->name('allocate');
     Route::post('/{id}/allocate', [CustomerPaymentController::class, 'storeAllocation'])->name('allocate.store');
     Route::get('/customer/{customerId}/invoices', [CustomerPaymentController::class, 'getCustomerInvoices'])->name('customer.invoices');
+});
+
+// Customer Routes
+Route::prefix('sales')->name('sales.')->group(function () {
+    Route::get('customer', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('customer/create', [CustomerController::class, 'create'])->name('customer.create');
+    Route::post('customer', [CustomerController::class, 'store'])->name('customer.store');
+    Route::get('customer/{id}', [CustomerController::class, 'show'])->name('customer.show');
+    Route::get('customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::put('customer/{id}', [CustomerController::class, 'update'])->name('customer.update');
+    Route::delete('customer/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
 });
