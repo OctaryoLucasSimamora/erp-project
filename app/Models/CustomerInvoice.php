@@ -62,8 +62,9 @@ class CustomerInvoice extends Model
 
     public function journalItems()
     {
-        return $this->hasMany(JournalItem::class);
+        return $this->morphMany(JournalItem::class, 'reference');
     }
+
 
     public function createdBy()
     {
@@ -149,7 +150,7 @@ class CustomerInvoice extends Model
                     }
                 }
             }
-            
+
             // Check and auto lock sales order
             $this->salesOrder->checkAndAutoLock();
         }
@@ -162,9 +163,8 @@ class CustomerInvoice extends Model
         $this->journalItems()->delete();
 
         // Account Receivable (debit)
-        JournalItem::create([
-            'customer_invoice_id' => $this->id,
-            'account_code' => '1101', // Piutang Usaha
+        $this->journalItems()->create([
+            'account_code' => '1101',
             'account_name' => 'Piutang Usaha',
             'debit' => $this->total_amount,
             'credit' => 0,
@@ -172,9 +172,8 @@ class CustomerInvoice extends Model
         ]);
 
         // Sales (credit)
-        JournalItem::create([
-            'customer_invoice_id' => $this->id,
-            'account_code' => '4101', // Pendapatan Penjualan
+        $this->journalItems()->create([
+            'account_code' => '4101',
             'account_name' => 'Pendapatan Penjualan',
             'debit' => 0,
             'credit' => $this->subtotal,
@@ -183,9 +182,8 @@ class CustomerInvoice extends Model
 
         // Tax (credit)
         if ($this->tax_amount > 0) {
-            JournalItem::create([
-                'customer_invoice_id' => $this->id,
-                'account_code' => '2103', // PPN Keluaran
+            $this->journalItems()->create([
+                'account_code' => '2103',
                 'account_name' => 'PPN Keluaran',
                 'debit' => 0,
                 'credit' => $this->tax_amount,

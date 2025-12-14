@@ -10,17 +10,13 @@ return new class extends Migration
     {
         Schema::create('journal_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('reference_id');
-            $table->string('reference_type')->default('customer_invoice');
-            $table->string('account_code', 10);
+            $table->morphs('reference'); // Ini akan membuat reference_id dan reference_type
+            $table->string('account_code');
             $table->string('account_name');
             $table->decimal('debit', 15, 2)->default(0);
             $table->decimal('credit', 15, 2)->default(0);
             $table->text('description')->nullable();
             $table->timestamps();
-
-            // Index untuk performa query polymorphic
-            $table->index(['reference_id', 'reference_type']);
         });
     }
 

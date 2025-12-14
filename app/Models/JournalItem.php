@@ -2,16 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class JournalItem extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'reference_id',
-        'reference_type', // 'customer_invoice' atau 'customer_payment'
+        'reference_type',
         'account_code',
         'account_name',
         'debit',
@@ -24,16 +21,9 @@ class JournalItem extends Model
         'credit' => 'decimal:2',
     ];
 
-    // Relationships
-    public function customerInvoice()
+    // Polymorphic relation
+    public function reference()
     {
-        return $this->belongsTo(CustomerInvoice::class, 'reference_id')
-            ->where('reference_type', 'customer_invoice');
-    }
-
-    public function customerPayment()
-    {
-        return $this->belongsTo(CustomerPayment::class, 'reference_id')
-            ->where('reference_type', 'customer_payment');
+        return $this->morphTo();
     }
 }
