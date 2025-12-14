@@ -99,14 +99,9 @@
                     <i class="fas fa-file-invoice mr-2"></i> Quotation
                 </a>
 
-                <!-- Customer -->
-                <a class="collapse-item" href="">
-                    <i class="fas fa-user-friends mr-2"></i> Customer
-                </a>
-
-                <!-- Penjualan -->
-                <a class="collapse-item" href="">
-                    <i class="fas fa-shopping-cart mr-2"></i> Penjualan
+                <!-- Sales Order -->
+                <a class="collapse-item" href="{{ route('sales.order.index') }}">
+                    <i class="fas fa-shopping-cart mr-2"></i> Sales Order
                 </a>
 
                 <!-- Invoice -->

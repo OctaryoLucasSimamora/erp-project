@@ -13,6 +13,7 @@ use App\Http\Controllers\RFQController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\VendorBillController;
 use App\Http\Controllers\QuotationController;
+use App\Http\Controllers\SalesOrderController;
 
 
 /*
@@ -116,4 +117,16 @@ Route::prefix('sales')->name('sales.')->group(function () {
     Route::delete('/quotation/{id}', [QuotationController::class, 'destroy'])->name('quotation.destroy');
     Route::post('/quotation/{id}/status', [QuotationController::class, 'updateStatus'])->name('quotation.status');
     Route::get('/quotation/{id}/convert', [QuotationController::class, 'convertToSalesOrder'])->name('quotation.convert');
+});
+
+// Sales Order Routes
+Route::prefix('sales/order')->name('sales.order.')->group(function () {
+    Route::get('/', [SalesOrderController::class, 'index'])->name('index');
+    Route::get('/create', [SalesOrderController::class, 'create'])->name('create');
+    Route::post('/', [SalesOrderController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [SalesOrderController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [SalesOrderController::class, 'update'])->name('update');
+    Route::delete('/{id}', [SalesOrderController::class, 'destroy'])->name('destroy');
+    Route::post('/{id}/confirm', [SalesOrderController::class, 'confirmOrder'])->name('confirm');
+    Route::post('/{id}/lock', [SalesOrderController::class, 'lockOrder'])->name('lock');
 });
