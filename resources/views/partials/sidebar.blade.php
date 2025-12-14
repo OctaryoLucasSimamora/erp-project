@@ -104,9 +104,8 @@
                     <i class="fas fa-shopping-cart mr-2"></i> Sales Order
                 </a>
 
-                <!-- Invoice -->
-                <a class="collapse-item" href="">
-                    <i class="fas fa-file-invoice-dollar mr-2"></i> Invoice
+                <a class="collapse-item" href="{{ route('sales.delivery.index') }}">
+                    <i class="fas fa-truck mr-2"></i> Delivery Order
                 </a>
 
                 <!-- Laporan -->

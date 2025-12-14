@@ -14,6 +14,7 @@ use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\VendorBillController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\SalesOrderController;
+use App\Http\Controllers\DeliveryOrderController;
 
 
 /*
@@ -105,14 +106,13 @@ Route::prefix('purchase')->group(function () {
     Route::get('/vendor-bill/{id}/payment', [VendorBillController::class, 'createPayment'])->name('purchase.vendor-bill.payment.create');
     Route::post('/vendor-bill/{id}/payment', [VendorBillController::class, 'processPayment'])->name('purchase.vendor-bill.payment.process');
     Route::get('/vendor-bill/convert/{poId}', [VendorBillController::class, 'convertFromPO'])->name('purchase.vendor-bill.convert');
-
 });
 // Sales - Quotation Routes
 Route::prefix('sales')->name('sales.')->group(function () {
     Route::get('/quotation', [QuotationController::class, 'index'])->name('quotation.index');
     Route::get('/quotation/create', [QuotationController::class, 'create'])->name('quotation.create');
     Route::post('/quotation', [QuotationController::class, 'store'])->name('quotation.store');
-    Route::get('/quotation/{id}/edit', [QuotationController::class, 'edit'])->name ('quotation.edit');
+    Route::get('/quotation/{id}/edit', [QuotationController::class, 'edit'])->name('quotation.edit');
     Route::put('/quotation/{id}', [QuotationController::class, 'update'])->name('quotation.update');
     Route::delete('/quotation/{id}', [QuotationController::class, 'destroy'])->name('quotation.destroy');
     Route::post('/quotation/{id}/status', [QuotationController::class, 'updateStatus'])->name('quotation.status');
@@ -129,4 +129,18 @@ Route::prefix('sales/order')->name('sales.order.')->group(function () {
     Route::delete('/{id}', [SalesOrderController::class, 'destroy'])->name('destroy');
     Route::post('/{id}/confirm', [SalesOrderController::class, 'confirmOrder'])->name('confirm');
     Route::post('/{id}/lock', [SalesOrderController::class, 'lockOrder'])->name('lock');
+});
+
+// Sales Order Routes
+Route::prefix('sales/delivery')->name('sales.delivery.')->group(function () {
+    Route::get('/', [DeliveryOrderController::class, 'index'])->name('index');
+    Route::get('/create', [DeliveryOrderController::class, 'create'])->name('create');
+    Route::post('/', [DeliveryOrderController::class, 'store'])->name('store');
+    Route::get('/{id}', [DeliveryOrderController::class, 'show'])->name('show');
+    Route::get('/{id}/edit', [DeliveryOrderController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [DeliveryOrderController::class, 'update'])->name('update');
+    Route::delete('/{id}', [DeliveryOrderController::class, 'destroy'])->name('destroy');
+    Route::post('/{id}/status', [DeliveryOrderController::class, 'updateStatus'])->name('update.status');
+    Route::get('/sales-order/{salesOrderId}/items', [DeliveryOrderController::class, 'getSalesOrderItems'])
+        ->name('sales.order.items');
 });
