@@ -10,7 +10,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Dashboard</h6>
       </div>
       <div class="card-body">
-        Selamat datang di ERP prototype — SB Admin 2 berhasil dipasang!
+        Selamat datang di ERP prototype PT Suka Makan
       </div>
     </div>
   </div>
