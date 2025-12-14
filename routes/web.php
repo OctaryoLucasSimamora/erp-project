@@ -15,6 +15,7 @@ use App\Http\Controllers\VendorBillController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\SalesOrderController;
 use App\Http\Controllers\DeliveryOrderController;
+use App\Http\Controllers\CustomerInvoiceController;
 
 
 /*
@@ -143,4 +144,21 @@ Route::prefix('sales/delivery')->name('sales.delivery.')->group(function () {
     Route::post('/{id}/status', [DeliveryOrderController::class, 'updateStatus'])->name('update.status');
     Route::get('/sales-order/{salesOrderId}/items', [DeliveryOrderController::class, 'getSalesOrderItems'])
         ->name('sales.order.items');
+});
+
+// Sales Invoice Routes
+// Customer Invoice Routes
+Route::prefix('sales/invoice')->name('sales.invoice.')->group(function () {
+    Route::get('/', [CustomerInvoiceController::class, 'index'])->name('index');
+    Route::get('/create', [CustomerInvoiceController::class, 'create'])->name('create');
+    Route::post('/', [CustomerInvoiceController::class, 'store'])->name('store');
+    Route::get('/{id}', [CustomerInvoiceController::class, 'show'])->name('show');
+    Route::get('/{id}/edit', [CustomerInvoiceController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [CustomerInvoiceController::class, 'update'])->name('update');
+    Route::delete('/{id}', [CustomerInvoiceController::class, 'destroy'])->name('destroy');
+    Route::post('/{id}/post', [CustomerInvoiceController::class, 'markAsPosted'])->name('post');
+    Route::post('/{id}/pay', [CustomerInvoiceController::class, 'markAsPaid'])->name('pay');
+    
+    // TAMBAHKAN INI ↓
+    Route::get('/source/items', [CustomerInvoiceController::class, 'getSourceItems'])->name('source.items');
 });

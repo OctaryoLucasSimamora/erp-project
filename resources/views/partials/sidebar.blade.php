@@ -108,10 +108,11 @@
                     <i class="fas fa-truck mr-2"></i> Delivery Order
                 </a>
 
-                <!-- Laporan -->
-                <a class="collapse-item" href="">
-                    <i class="fas fa-chart-bar mr-2"></i> Laporan Penjualan
+                <!-- Invoice -->
+                <a class="collapse-item" href="{{ route('sales.invoice.index') }}">
+                    <i class="fas fa-receipt mr-2"></i> Invoice
                 </a>
+
 
                 <!-- Retur (Opsional) -->
                 <a class="collapse-item" href="">
